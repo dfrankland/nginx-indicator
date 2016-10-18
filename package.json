@@ -1,0 +1,43 @@
+{
+  "name": "nginx-indicator",
+  "version": "1.0.0",
+  "description": "Indicator for Nginx server, click to start \"nginx\" process.",
+  "scripts": {
+    "start": "electron .",
+    "build": "build -ml"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dfrankland/nginx-indicator.git"
+  },
+  "keywords": [
+    "nginx",
+    "indicator",
+    "electron"
+  ],
+  "author": "Dylan Frankland <dylan@frankland.io>",
+  "contributors": [],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dfrankland/nginx-indicator/issues"
+  },
+  "homepage": "https://github.com/dfrankland/nginx-indicator#readme",
+  "build": {
+    "appId": "co.dfrankland.nginx-indicator",
+    "mac": {
+      "category": "public.app-category.developer-tools"
+    }
+  },
+  "dependencies": {
+    "auto-launch": "^5.0.1",
+    "electron-log": "^1.1.1",
+    "ps-list": "^3.1.0",
+    "regenerator-runtime": "^0.9.5",
+    "sudo-prompt": "^6.2.0"
+  },
+  "devDependencies": {
+    "7zip-bin-mac": "^1.0.1",
+    "electron-builder": "^7.14.1",
+    "electron-prebuilt": "^1.4.3"
+  }
+}
