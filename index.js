@@ -1,21 +1,11 @@
-var AutoLaunch = require('auto-launch');
-const { app, Tray } = require('electron');
+const { app, Tray } = require('electron'); // eslint-disable-line import/no-extraneous-dependencies
 const { resolve: resolvePath } = require('path');
 const sudo = require('sudo-prompt');
 const psList = require('ps-list');
 const log = require('electron-log');
 
 // Fix for nginx being installed with brew
-process.env.PATH = process.env.PATH + ':/usr/local/bin';
-
-// Try to always auto-launch app
-const autoLaunch = new AutoLaunch({ name: 'nginx-indicator' });
-autoLaunch.isEnabled().then(
-  isEnabled => {
-    if (isEnabled) return;
-    autoLaunch.enable();
-  }
-);
+process.env.PATH += ':/usr/local/bin';
 
 // Active / Inactive Nginx "G" logos
 const ACTIVE = resolvePath(__dirname, 'nginx-active.png');
@@ -40,19 +30,22 @@ app.on('ready', () => {
           let process;
           let running = false;
 
-          for (let i = 0; i < processes.length; i++) {
+          for (let i = 0; i < processes.length; i += 1) {
             process = processes[i].name;
-            if (/.*?nginx-indicator.*?/.test(process)) continue;
-            if (/.*?nginx.*?/.test(process)) {
+            if (
+              !/.*?nginx-indicator.*?/.test(process) &&
+              /.*?nginx.*?/.test(process)
+            ) {
               running = true;
               break;
             }
           }
 
           tray.setImage(running ? ACTIVE : INACTIVE);
-        }
-      );;
-    }, 1000
+        } // eslint-disable-line comma-dangle
+      );
+    },
+    1000 // eslint-disable-line comma-dangle
   );
 });
 
